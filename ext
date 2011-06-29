@@ -1,0 +1,17 @@
+#!/bin/sh
+
+for file in "$*"; do 
+	case "$file" in
+		*.tar)	tar xf "$file" ;;
+		*.tar.bz|*.tar.bz2|*.tbz)	bzip2 -cd "$file" | tar xf - ;;
+		*.tar.gz|*.tgz)	gzip -cd "$file" | tar xf - ;;
+		*.tar.[Zz]|*.tz)	gzip -cd "$file" | tar xf - ;;
+		*.[Zz][Ii][Pp])	unzip "$file" ;;
+		*.bz|*.bz2)	bzip2 -d "$file" | more ;;
+		*.gz|*.[zZ])	gzip -d "$file" ;;
+		*.rar|*.r[0-9][0-9])	unrar x "$file" ;;
+		*.ace)	unace x "$file" ;;
+		*.lha|*.lzh)	lha x "$file" ;;
+		*)	echo "don't know how to deal with $file"
+	esac
+done
