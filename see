@@ -1,0 +1,18 @@
+#!/bin/sh
+
+for file in "$*"; do 
+	case "$file" in
+		*.tar)	tar tf "$file" | more ;;
+		*.tar.bz|*.tar.bz2|*.tbz)	bzip2 -cd "$file" | tar tf - | more ;;
+		*.tar.gz|*.tgz)	gzip -cd "$file" | tar tf - | more ;;
+		*.tar.[Zz]|*.tz)	gzip -cd "$file" | tar tf - | more ;;
+		*.[Zz][Ii][Pp])	unzip -l -v "$file" | more ;;
+		*.jar|*.war)	jar -tvf "$file" | more ;;
+		*.bz|*.bz2)	bzip2 -cd "$file" | more ;;
+		*.gz|*.[zZ])	gzip -cd "$file" | more ;;
+		*.rar|*.r[0-9][0-9])	unrar l "$file" | more;;
+		*.ace)	unace l "$file" | more;;
+		*.lha|*.lzh)	lha v "$file" | more;;
+		*) more "$file"
+	esac
+done
