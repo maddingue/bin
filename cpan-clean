@@ -1,0 +1,4 @@
+#!/bin/sh
+sudo chown -R $USER: ~/.cpan*
+chmod -R u+w ~/.cpan*
+rm -rf  ~/.cpan/sources/authors/id/*  ~/.cpan/build/*  .cpan/sources/*/*.bak  ~/.cpanplus/authors/id/*  ~/.cpanplus/5*/build/*  ~/.cpanm/build*
