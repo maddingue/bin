@@ -1,0 +1,3 @@
+#!/bin/sh
+file="$1" ; shift
+echo "$@" >> "$file"
