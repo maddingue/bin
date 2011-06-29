@@ -1,0 +1,2 @@
+#!/bin/sh
+while :; do date; sleep 300; done
