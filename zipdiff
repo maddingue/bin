@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+use strict;
+use Algorithm::Diff;
+use File::Read 'aggregate=0';
+
+my @file_a = read_file(shift);
+my @file_b = read_file(shift);
+
+my $diff = Algorithm::Diff->new(\@file_a, \@file_b);
+
+while ($diff->Next) {
+    if ($diff->Same) {
+        print "  $_" for $diff->Items(1);
+    } else {
+        print "- $_" for $diff->Items(1);
+        print "+ $_" for $diff->Items(2);
+    }
+}
