@@ -1,0 +1,1 @@
+perl -e '$ARGV[2]||="%s";printf$ARGV[0].$/,$_,$_ for+shift..shift' "$@"
