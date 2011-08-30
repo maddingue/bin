@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+use strict;
+use HTML::LinkExtor;
+use List::MoreUtils qw< uniq >;
+use LWP::Simple;
+
+
+my @links;
+my $url     = shift || die "usage: $0 url\n";
+my $page    = get($url) || die "can't fetch $url\n";
+my $extor   = HTML::LinkExtor->new(sub {
+    my ($tag, %attrs) = @_;
+    push @links, $attrs{href} if $tag eq "a";
+    push @links, $attrs{src}  if $tag eq "img";
+});
+$extor->parse($page);
+$extor->eof;
+
+print join $/, uniq @links, "";
+
